@@ -1,0 +1,44 @@
+@Host = http://127.0.0.1:5000
+
+
+###Get All the Vehicle_Owners
+GET {{Host}}/vehicleowners
+Content-Type: application/json
+
+###Get Logins
+GET {{Host}}/vehicleowners/login
+Content-Type: application/json
+
+
+### Create a User/Vehicle_Owners
+POST {{Host}}/vehicleowners
+Content-Type: application/json
+
+{
+        "firstname": "Pia",
+        "lastname": "Gonzaga",
+        "phonenumber": "090562123232",
+        "email": "pia@gmail.com",
+        "username": "Pia123",
+        "password": "admin123"
+}
+
+#### Get By Vehicle_Owners_ID
+GET {{Host}}/vehicleowners/24
+Content-Type: application/json
+
+
+###Update
+PUT {{Host}}/vehicleowners/24
+Content-Type: application/json
+
+{
+        "firstname": "Earon",
+        "lastname": "Marson",
+        "phonenumber": "123124123123",
+        "email": "owenbayot@gmail.com"
+}
+
+
+###Delete
+DELETE {{Host}}/vehicleowners/25
