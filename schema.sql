@@ -116,5 +116,19 @@ CREATE VIEW vehicle_owners AS
 
 ###
 CREATE VIEW login_users AS
-	SELECT vehicleowners.vo_id, vehicleowners.email, users.password FROM vehicleowners
+	SELECT vehicleowners.vo_id, firstname, lastname, email, users.password FROM vehicleowners
     INNER JOIN users on users.vo_id = vehicleowners.vo_id;
+
+
+DELIMITER $$$
+CREATE TRIGGER after_insert_vehicleowner
+AFTER INSERT ON vehicleowners
+FOR EACH ROW
+BEGIN
+    DECLARE email_ VARCHAR(200);
+    
+    SELECT email INTO email_ FROM vehicleowners WHERE vo_id = NEW.vo_id;
+    
+    UPDATE users SET username = email_ WHERE vo_id = NEW.vo_id;
+END$$$
+DELIMITER ;
