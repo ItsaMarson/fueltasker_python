@@ -11,34 +11,34 @@ Content-Type: application/json
 
 
 ### Create a User/Vehicle_Owners
-POST {{Host}}/vehicleowners
+POST {{Host}}/vehicleowners/login
 Content-Type: application/json
 
 {
         "firstname": "Pia",
         "lastname": "Gonzaga",
         "phonenumber": "090562123232",
-        "email": "pia@gmail.com",
+        "email": "pia123@gmail.com",
         "username": "Pia123",
         "password": "admin123"
 }
 
 #### Get By Vehicle_Owners_ID
-GET {{Host}}/vehicleowners/24
+GET {{Host}}/vehicleowners/1
 Content-Type: application/json
 
 
 ###Update
-PUT {{Host}}/vehicleowners/24
+PUT {{Host}}/vehicleowners/2
 Content-Type: application/json
 
 {
         "firstname": "Earon",
-        "lastname": "Marson",
-        "phonenumber": "123124123123",
-        "email": "owenbayot@gmail.com"
+        "lastname": "Gonzaga",
+        "phonenumber": "090062342123",
+        "email": "earongonzaga@gmail.com"
 }
 
 
 ###Delete
-DELETE {{Host}}/vehicleowners/25
+DELETE {{Host}}/vehicleowners/2
