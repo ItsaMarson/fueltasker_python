@@ -9,7 +9,7 @@ def create_vehicle_owner_login(data):
     cur = execute("""CALL create_login_vehicleowners(%s, %s, %s, %s)""",
                   (data["firstname"], data["lastname"],data["email"], data["password"]))
     row = cur.fetchone()
-    if row is not None:
+    if 'vo_id' in row:
         data["vo_id"] = row["vo_id"]
     return data 
 

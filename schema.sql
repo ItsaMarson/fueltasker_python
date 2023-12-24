@@ -17,7 +17,33 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB;
 
 DELIMITER $$$
-CREATE Procedure create_vehicleowers(
+CREATE PROCEDURE create_vehicleowners(
+	IN _firstname VARCHAR(200),
+    IN _lastname VARCHAR(200),
+    IN _email VARCHAR(200),
+    IN _phonenumber VARCHAR(200),
+    IN _username VARCHAR(200),
+    IN _password VARCHAR(200)
+)
+BEGIN
+	DECLARE _vo_id INT;
+    DECLARE _userID INT;
+    
+    INSERT INTO vehicleowners(firstname,lastname,email,phonenumber)
+    VALUES (_firstname, _lastname, _email, _phonenumber);
+    SET _vo_id = LAST_INSERT_ID();
+    
+    INSERT INTO users(username,password,vo_id)
+    VALUES (_username,_password,_vo_id);
+    SET _userID = LAST_INSERT_ID();
+    
+    SELECT _vo_id, _userID AS VehicleOwners_ID;
+END$$$
+DELIMITER ;
+
+
+DELIMITER $$$
+CREATE Procedure create_login_vehicleowners(
     IN _firstname VARCHAR(200),
     IN _lastname VARCHAR(200),
     IN _email VARCHAR(200),
@@ -26,15 +52,20 @@ CREATE Procedure create_vehicleowers(
 BEGIN
     DECLARE _vo_id INT;
     DECLARE _userID INT;
-    INSERT INTO vehicleowners (firstname,lastname,phonenumber,email) 
-        VALUES (_firstname, _lastname, _phonenumber, _email);
+    DECLARE email_ VARCHAR(200);
+	INSERT INTO vehicleowners (firstname, lastname, email)
+    VALUES (_firstname, _lastname, _email);
     SET _vo_id = LAST_INSERT_ID();
+    
+    SELECT email INTO email_ from vehicleowners where _vo_id = vo_id;
+    
+    INSERT INTO users (username, password, vo_id)
+    VALUES (email_, _password, _vo_id);
 
-    INSERT INTO users (username,password,vo_id) 
-        VALUES (_username, _password, _vo_id);
     SET _userID = LAST_INSERT_ID();
-    SELECT _vo_id, _userID AS VehicleOwners;
+    SELECT _vo_id, _userID AS vehicle_owners;
 END$$$
+DELIMITER ;
 
 DELIMITER $$$
 CREATE PROCEDURE update_vehicleowners(
